@@ -2,6 +2,6 @@
   import TodoList from "./lib/TodoList.svelte";
 </script>
 
-<main>
+<main class="p-4">
   <TodoList />
 </main>
