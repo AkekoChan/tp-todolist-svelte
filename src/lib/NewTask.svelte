@@ -1,17 +1,33 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { tasks } from "./stores.js";
 
-  const dispatch = createEventDispatcher();
+  let newTask = "";
 
-  function addTask() {
-    dispatch("add"), {};
+  function addNewTask() {
+    let task = {
+      id: Date.now(),
+      name: newTask,
+      status: false,
+    };
+    tasks.set([...$tasks, task]);
+    newTask = "";
   }
+
+  $: console.table($tasks);
 </script>
 
-<form>
+<form on:submit|preventDefault={addNewTask}>
   <div>
     <label for="newTask" class="form-label fw-bold fs-3">Nouvelle tâche</label>
-    <input type="text" name="newTask" class="form-control mb-3 w-50" />
+    <input
+      type="text"
+      name="newTask"
+      bind:value={newTask}
+      class="form-control mb-3 w-50"
+      required
+    />
   </div>
-  <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
+  <button type="submit" disabled={!newTask} class="btn btn-primary mb-3"
+    >Ajouter</button
+  >
 </form>

@@ -4,6 +4,5 @@
 </script>
 
 <main class="p-4">
-  <!-- <NewTask /> -->
   <TodoList />
 </main>
